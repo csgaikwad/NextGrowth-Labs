@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+	 viewBox="0 0 512.024 512.024" xml:space="preserve">
+<polygon style="fill:#0D91BA;" points="176.896,67.3 150.88,36.084 52.032,36.084 20.808,67.3 20.808,108.924 437.04,108.924 
+	437.04,67.3 "/>
+<rect y="108.924" style="fill:#25B6D2;" width="457.84" height="299.2"/>
+<rect x="46.824" y="88.092" style="fill:#FFFFFF;" width="364.2" height="20.808"/>
+<circle style="fill:#FFF;" cx="426.32" cy="390.236" r="85.704"/>
+<g>
+	<rect x="385" y="380" style="fill:#312e81;" width="90" height="20"  rx="10" ry="10"/>
+	<rect x="420" y="345" style="fill:#312e81;" width="20" height="90"  rx="10" ry="10"/>
+</g>
+</svg>

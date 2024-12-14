@@ -1,0 +1,60 @@
+body {
+  background-color: #011f3f !important;
+}
+
+#level-title {
+  font-family: "Press Start 2P", cursive;
+  font-size: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 5rem;
+  color: #fef2bf;
+}
+
+.pressableBtn {
+  border: 10rem  black !important;
+  border-radius: 20%;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.2s ease;
+}
+
+#green {
+  background-color: green;
+}
+
+#red {
+  background-color: red;
+}
+
+#yellow {
+  background-color: yellow;
+}
+
+#blue {
+  background-color: blue;
+}
+
+.pressed {
+  box-shadow: 0 0 2rem white, 0 0 2rem white;
+  background-color: aqua;
+}
+
+.flash {
+  animation: flashAnimation 0.3s ease-in-out;
+}
+
+@keyframes flashAnimation {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.game-over {
+  background-color: red !important;
+  opacity: 0.8 !important;
+}
