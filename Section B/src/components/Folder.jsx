@@ -2,29 +2,47 @@ import React, { useContext, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import RenderFiles from "../utils/RenderFiles";
 import DisplayContext from "../context/DisplayContext";
+import { removeFolder } from "../utils/removeData";
+import FolderArrows from "./FolderArrows";
 
-export default function Folder({ title, SubObject }) {
-  const { displayAllData, setDisplayAllData } = useContext(DisplayContext);
+export default function Folder({
+  title,
+  SubObject,
+  showDeleteIcon,
+  setFileState,
+}) {
+  const { displayAllData } = useContext(DisplayContext);
 
   const [displayFiles, setDisplayFiles] = useState(displayAllData);
 
   useEffect(() => {
     setDisplayFiles(displayAllData);
   }, [displayAllData]);
+
   return (
     <div className="folder">
       <div
-        className="cursor-pointer inline-block"
-        onClick={() => setDisplayFiles(!displayFiles)}
+        className="cursor-pointer flex w-fit"
+        onClick={() => {
+          setDisplayFiles(!displayFiles);
+        }}
       >
-        <span
-          className={`inline-block hover:scale-110 duration-200 mr-1 ${
-            !displayFiles && "-rotate-90"
-          }`}
-        >
-          {"︾"}
-        </span>
-        <span className="emoji">📁</span>
+        <div className="w-6">
+          {showDeleteIcon ? (
+            <span
+              className="delete-icon"
+              onClick={(e) => {
+                e.stopPropagation();
+                setFileState((prevState) => removeFolder(prevState, title));
+              }}
+            >
+              ❌
+            </span>
+          ) : (
+            <FolderArrows conditionToRotate={displayFiles} />
+          )}
+        </div>
+        <span className="mr-1">📁</span>
         <span className="my-1 text-center">{title}</span>
       </div>
       {/* Framer Motion for smooth expand/collapse */}
@@ -38,7 +56,11 @@ export default function Folder({ title, SubObject }) {
         transition={{ duration: 0.15, ease: "easeInOut" }}
         className="ml-5 overflow-hidden"
       >
-        <RenderFiles SubObject={SubObject} />
+        <RenderFiles
+          SubObject={SubObject}
+          showDeleteIcon={showDeleteIcon}
+          setFileState={setFileState}
+        />
       </motion.div>
     </div>
   );

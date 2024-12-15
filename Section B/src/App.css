@@ -16,3 +16,7 @@ body {
 span {
   @apply my-1;
 }
+
+.delete-icon {
+  @apply inline-block cursor-pointer hover:scale-110 duration-150;
+}

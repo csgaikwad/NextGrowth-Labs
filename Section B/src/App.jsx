@@ -3,26 +3,22 @@ import "./App.css";
 import FileOrFolder from "./utils/FileOrFolder";
 import sortJsonObject from "./utils/sortJsonObject";
 import DisplayContext from "./context/DisplayContext";
+import JsonData from "./components/JsonData";
+import CRUD_icon from "./components/CRUD_icon";
+import FolderArrows from "./components/FolderArrows";
 
 export default function App() {
-  const JsonData = {
-    Documents: ["Document1.jpg", "Document2.jpg", "Document3.jpg"],
-    Desktop: ["Screenshot1.jpg", "videopal.mp4"],
-    Downloads: {
-      Drivers: ["Printerdriver.dmg", "cameradriver.dmg"],
-      Applications: [
-        "Webstorm.dmg",
-        "Pycharm.dmg",
-        "FileZila.dmg",
-        "Mattermost.dmg",
-      ],
-      "chromedriver.dmg": null,
-    },
-  };
-
   const FileStructure = sortJsonObject(JsonData);
 
+  const [FileState, setFileState] = useState(FileStructure);
+
   const [displayAllData, setDisplayAllData] = useState(true);
+
+  const [showDeleteIcon, setShowDeleteIcon] = useState(true);
+
+  useEffect(() => {
+    console.log(FileState);
+  }, [FileState]);
 
   return (
     <DisplayContext.Provider value={{ displayAllData, setDisplayAllData }}>
@@ -32,32 +28,29 @@ export default function App() {
             className="cursor-pointer"
             onClick={() => setDisplayAllData(!displayAllData)}
           >
-            <span
-              className={`inline-block hover:scale-110 duration-200 ${
-                !displayAllData && "-rotate-90"
-              }`}
-            >
-              {"︾"}
-            </span>
+            <FolderArrows conditionToRotate={displayAllData} />
             <span className="m-2 text-center">Evaluation</span>
           </div>
           <div className="flex ml-10  items-center gap-2">
-            <img
-              className="size-7 cursor-pointer"
-              src="/add-file.svg"
-              alt="Add file"
-            />
-            <img
-              className="size-8 cursor-pointer"
-              src="/add-folder.svg"
-              alt="Add folder"
+            <CRUD_icon iconName={"add-file"} />
+            <CRUD_icon iconName={"add-folder"} />
+            <CRUD_icon
+              iconName={"dustbin"}
+              onClick={() => {
+                setShowDeleteIcon(!showDeleteIcon);
+              }}
             />
           </div>
         </div>
-        {Object.keys(FileStructure).map((data, index) => {
+        {Object.keys(FileState).map((data, index) => {
           return (
             <div key={index}>
-              <FileOrFolder data={data} MainObject={FileStructure} />
+              <FileOrFolder
+                data={data}
+                MainObject={FileState}
+                showDeleteIcon={showDeleteIcon}
+                setFileState={setFileState}
+              />
             </div>
           );
         })}
